@@ -1,0 +1,253 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-zinc-950 text-zinc-200 antialiased overflow-x-hidden;
+  }
+
+  body:not(:has(button:hover, a:hover, [role="button"]:hover)) * {
+    cursor: none;
+  }
+
+  button:hover, a:hover, [role="button"]:hover {
+    cursor: pointer !important;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #fff, #888, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: textShine 5s ease infinite;
+}
+
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bg-artwork {
+  background-image: linear-gradient(to bottom, rgba(24, 24, 27, 0.7), rgba(24, 24, 27, 0.95)), url("https://upload.wikimedia.org/wikipedia/commons/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+    background-position: center;
+  }
+}
+
+.glass {
+  backdrop-filter: blur(16px);
+  background: rgba(24, 24, 27, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-border {
+  position: relative;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(45deg,
+    rgba(255, 255, 255, 0.5),
+    rgba(128, 128, 128, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
+  background-size: 200% 200%;
+  animation: borderGlow 5s ease infinite;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, 
+    rgba(255, 255, 255, 0.1),
+    rgba(128, 128, 128, 0.1),
+    rgba(255, 255, 255, 0.1)
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+.project-card {
+  position: relative;
+  transition: transform 0.3s ease;
+  transform-origin: left center;
+  margin-left: 1rem;
+  
+  @media (min-width: 768px) {
+    margin-left: 2rem;
+  }
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 3rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: linear-gradient(45deg, #9333ea 0%, #3b82f6 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.7);
+  animation: dotPulse 2s ease infinite;
+  z-index: 10;
+  
+  @media (min-width: 768px) {
+    left: -2rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.projects-timeline {
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.projects-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -2rem;
+  bottom: -2rem;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(147, 51, 234, 0.8) 10%,
+    rgba(59, 130, 246, 0.8) 50%,
+    rgba(147, 51, 234, 0.8) 90%,
+    transparent 100%
+  );
+  animation: timelineGlow 5s ease infinite;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  
+  @media (min-width: 768px) {
+    width: 2px;
+  }
+}
+
+@keyframes timelineGlow {
+  0%, 100% { 
+    opacity: 0.5;
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+  50% { 
+    opacity: 1;
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+  }
+}
+
+@keyframes dotPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.7);
+  }
+  50% { 
+    transform: scale(1.2);
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.9);
+  }
+}
+
+/* Status badge glow effect */
+.status-badge {
+  position: relative;
+}
+
+.status-badge::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: inherit;
+  filter: blur(8px);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Shine effect */
+@keyframes shine {
+  from {
+    mask-position: 150%;
+  }
+  to {
+    mask-position: -50%;
+  }
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shine 3s infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+@keyframes floatShadow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(5px) scale(1.1);
+    opacity: 0.1;
+  }
+}
