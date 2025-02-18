@@ -8,9 +8,11 @@ import ScrollAnimation from './components/ScrollAnimation';
 
 const SPRING_CONFIG = { damping: 15, stiffness: 150, mass: 0.8 };
 const SOCIAL_LINKS = [
-  { icon: Github, href: 'https://github.com', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:hello@example.com', label: 'Email' },
+  { icon: Github, href: 'https://github.com/Sachian05', label:
+    'GitHub' },
+  { icon: Twitter, href: 'https://x.com/Sachian_hk', label: 'Twitter' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/sachianderan/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:sachianhk@gmail.com', label: 'Email' },
 ];
 
 const SKILLS = {
@@ -60,10 +62,10 @@ const SKILLS = {
 const WORK_HISTORY = [
   {
     id: 1,
-    company: "Tech Innovations Inc",
-    role: "Senior Frontend Developer",
-    period: "2021 - Present",
-    location: "San Francisco, CA",
+    company: "Shoppers Drug Mart",
+    role: "Pharmacy Assistant",
+    period: "2020 - 2022",
+    location: "Innisfil, CA",
     description: "Led the frontend development team in creating cutting-edge web applications using React and TypeScript.",
     achievements: [
       "Improved application performance by 40% through code optimization",
@@ -71,7 +73,7 @@ const WORK_HISTORY = [
       "Implemented CI/CD pipelines reducing deployment time by 60%",
       "Led the migration from Angular to React for 5 major applications"
     ],
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS", "GraphQL"],
+    technologies: ["HealthWatch Software", "Controlled Substance", "Next.js", "Tailwind CSS", "GraphQL"],
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
   },
   {
@@ -115,7 +117,7 @@ const PROJECTS = [
     description: "An AI-powered personal finance tracking application that helps users manage their money smarter using cutting-edge machine learning.",
     url: "https://moneymaster.live",
     github: "https://github.com/username/moneymaster",
-    status: "Active",
+    status: "Active", // First project stays active
     features: [
       "AI-powered expense categorization",
       "Real-time budget tracking and alerts",
@@ -134,11 +136,11 @@ const PROJECTS = [
   },
   {
     id: 2,
-    name: "Portfolio 2025",
+    name: "Courtside App",
     description: "My personal portfolio website showcasing my projects and skills. Built with modern web technologies and featuring smooth animations.",
     url: "https://sachianderan.dev",
     github: "https://github.com/username/portfolio-2025",
-    status: "Active",
+    status: "Planning",
     features: [
       "Responsive design",
       "Custom animations",
@@ -155,11 +157,11 @@ const PROJECTS = [
   },
   {
     id: 3,
-    name: "ChatGPT Clone",
+    name: "Nervont.store",
     description: "A full-featured ChatGPT clone with real-time chat, code highlighting, and markdown support.",
-    url: "https://chat.sachianderan.dev",
-    github: "https://github.com/username/chatgpt-clone",
-    status: "Active",
+    url: "https://nervont.store",
+    github: "https://github.com/sachian05",
+    status: "Paused",
     features: [
       "Real-time chat",
       "Code syntax highlighting",
@@ -218,21 +220,32 @@ const DateDisplay = () => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 1000);
+    const timer = setInterval(() => setDate(new Date()), 1000 * 60); // Update every minute
     return () => clearInterval(timer);
   }, []);
 
-  const formattedDate = date.toLocaleDateString('en-US', {
+  const formattedDay = date.toLocaleDateString('en-US', {
     weekday: 'long',
-    year: 'numeric',
+  });
+
+  const formattedDate = date.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
+    year: 'numeric',
   });
 
   return (
-    <div className="flex items-center gap-2 text-zinc-400 glass px-4 py-2 rounded-lg">
-      <Clock className="w-4 h-4" />
-      <span>{formattedDate}</span>
+    <div className="glass gradient-border rounded-xl p-4 w-[280px] group hover:bg-white/5 transition-colors">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <Clock className="w-4 h-4 text-purple-400" />
+          <span className="text-purple-300 font-medium">{formattedDay}</span>
+        </div>
+        <div className="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse" />
+      </div>
+      <div className="text-lg text-zinc-200 font-light tracking-wide">
+        {formattedDate}
+      </div>
     </div>
   );
 };
@@ -297,7 +310,9 @@ const ProjectCard = ({ project, index }: { project: typeof PROJECTS[0], index: n
             <span className={`status-badge px-3 py-1 rounded-full text-sm font-medium ${
               project.status === 'Active'
                 ? 'bg-emerald-500/20 text-emerald-300'
-                : 'bg-purple-500/20 text-purple-300'
+                : project.status === 'Planning'
+                  ? 'bg-blue-500/20 text-blue-300'
+                  : 'bg-yellow-500/20 text-yellow-300'
             }`}>
               {project.status}
             </span>
@@ -341,7 +356,7 @@ const ProjectCard = ({ project, index }: { project: typeof PROJECTS[0], index: n
             whileTap={{ scale: 0.98 }}
           >
             <Globe className="w-4 h-4" />
-            Live Demo
+            Live 
           </motion.a>
           <motion.a
             href={project.github}
@@ -537,47 +552,49 @@ function App() {
             <div className="min-h-screen px-4 py-12 md:py-20 md:px-8 lg:px-16 2xl:px-0">
               <div className="max-w-7xl mx-auto space-y-32">
                 <ScrollAnimation id="home">
-                  <div className="relative space-y-8 glass gradient-border animated-gradient p-8 md:p-12 rounded-2xl overflow-hidden">
+                  <div className="relative glass gradient-border animated-gradient p-8 md:p-12 lg:p-16 rounded-[2.5rem] overflow-hidden min-h-[85vh] flex items-center justify-center">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-purple-500/40 via-blue-500/20 to-transparent opacity-70" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/30 via-transparent to-transparent opacity-70" />
+                    <div className="absolute inset-0 backdrop-blur-[2px]" />
                     
-                    <div className="relative">
-                    <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
-                      <div className="flex flex-col gap-10 items-center md:items-start text-center md:text-left max-w-4xl">
-                        <div className="space-y-4">
+                    <div className="relative w-full">
+                    <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-12">
+                      <div className="flex flex-col gap-8 items-center text-center max-w-3xl mx-auto">
+                        <div className="space-y-3">
                           <div className="relative">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: "100%" }}
-                              transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                              className="absolute -left-6 top-1/2 -translate-y-1/2 h-2 bg-gradient-to-r from-purple-500 to-transparent"
-                            />
-                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold gradient-text leading-tight">
-                              Sachianderan Hari kovinth
+                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold gradient-text leading-[1.1] tracking-tight">
+                              Sachianderan Hari Kovinth
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: "100%" }}
+                                transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+                                className="absolute -left-12 top-[100%] h-3 bg-gradient-to-r from-purple-500 via-blue-500 to-transparent rounded-full opacity-80"
+                              />
                             </h1>
                           </div>
-                          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-400">
+                          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-zinc-200 font-light tracking-wide">
                             Junior Front-End Web Developer
                           </h2>
-                          <div className="inline-flex items-center gap-3 px-6 py-3 bg-emerald-500/10 rounded-full">
+                          <div className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-500/10 rounded-full border border-emerald-500/20 shadow-xl shadow-emerald-500/10 backdrop-blur-sm">
                             <div className="relative flex items-center">
-                              <div className="w-4 h-4 bg-emerald-500 rounded-full" />
-                              <div className="absolute w-4 h-4 bg-emerald-500 rounded-full animate-ping" />
+                              <div className="w-5 h-5 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500/50" />
+                              <div className="absolute w-5 h-5 bg-emerald-500 rounded-full animate-ping" />
                             </div>
-                            <span className="text-emerald-500 font-medium text-base sm:text-lg">Available for hire</span>
+                            <span className="text-emerald-300 font-medium text-xl tracking-wide">Available for hire</span>
                           </div>
                         </div>
                       </div>
-                      
-                      <div className="flex flex-col gap-6 w-full lg:w-auto items-center lg:items-end">
+                      <div className="flex flex-col gap-8 w-full lg:w-auto items-center">
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5, delay: 0.3 }}
+                         className="backdrop-blur-xl w-[280px]"
                         >
                           <DateDisplay />
                         </motion.div>
-                        <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                       <div className="grid grid-cols-4 w-[280px] gap-4">
                           {SOCIAL_LINKS.map((link, index) => (
                             <motion.div
                               key={link.label}
@@ -590,34 +607,16 @@ function App() {
                                 delay: 0.5 + index * 0.1,
                               }}
                             >
-                            <SocialLink key={link.label} {...link} />
+                           <SocialLink {...link} />
                             </motion.div>
                           ))}
                         </div>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          className="relative group mt-4 transform-gpu perspective-1000"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5, delay: 0.8 }}
-                        >
-                          <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/50 to-blue-500/50 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                          <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 group-hover:ring-white/20 transition-all duration-500" />
-                          <img
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400"
-                            alt="Profile"
-                            className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 object-cover rounded-2xl relative shadow-2xl shadow-purple-500/20 group-hover:shadow-purple-500/30 transition-all duration-500 z-10"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-20" />
-                        </motion.div>
                       </div>
                     </div>
 
-                    <div className="space-y-6 mt-12">
+                    <div className="space-y-4 mt-4 lg:mt-8 text-center">
                       <motion.p 
-                        className="text-lg sm:text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto md:mx-0 text-center md:text-left leading-relaxed"
+                        className="text-lg sm:text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto text-center leading-relaxed font-light tracking-wide"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 1 }}
@@ -625,32 +624,36 @@ function App() {
                         Passionate about web development and eager to contribute to innovative projects.
                         Currently seeking opportunities to apply and expand my skills in a professional environment.
                       </motion.p>
-                      <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                      <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center">
                         <motion.a
                           href="#work"
-                          className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl font-medium hover:opacity-90 transition-all shadow-lg shadow-purple-600/20 relative overflow-hidden group whitespace-nowrap text-lg"
+                          className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 text-white rounded-xl font-medium transition-all shadow-xl shadow-blue-500/20 relative overflow-hidden group whitespace-nowrap text-base tracking-wide hover:shadow-2xl hover:shadow-blue-500/40 border border-white/10 bg-[length:200%_100%] animate-gradient"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.5, delay: 1.2 }}
                         >
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                          View Work <ArrowUpRight className="w-4 h-4" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                          <span className="relative z-10 flex items-center gap-2">
+                            View Work <ArrowUpRight className="w-5 h-5" strokeWidth={2.5} />
+                          </span>
                         </motion.a>
                         <motion.a
                           href="https://upload.wikimedia.org/wikipedia/commons/c/cc/Resume.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium hover:bg-white/20 transition-all relative overflow-hidden group whitespace-nowrap text-lg"
+                          className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white rounded-xl font-medium transition-all relative overflow-hidden group whitespace-nowrap text-base tracking-wide border border-white/10 hover:bg-white/15 hover:border-white/20"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           initial={{ opacity: 0, x: 20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.5, delay: 1.4 }}
                         >
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                          Resume <ExternalLink className="w-4 h-4" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                          <span className="relative z-10 flex items-center gap-2">
+                            Resume <ExternalLink className="w-5 h-5" strokeWidth={2.5} />
+                          </span>
                         </motion.a>
                       </div>
                     </div>
@@ -739,4 +742,5 @@ function App() {
   );
 }
 
-export default App;
+
+export default App

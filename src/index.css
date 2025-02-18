@@ -7,13 +7,27 @@
     @apply bg-zinc-950 text-zinc-200 antialiased overflow-x-hidden;
   }
 
-  body:not(:has(button:hover, a:hover, [role="button"]:hover)) * {
+  html, body {
     cursor: none;
   }
 
-  button:hover, a:hover, [role="button"]:hover {
+  button:hover, a:hover, [role="button"]:hover, input:hover, select:hover, textarea:hover {
     cursor: pointer !important;
   }
+
+  * {
+    cursor: none;
+  }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  animation: gradientMove 3s ease infinite;
 }
 
 .gradient-text {
@@ -21,14 +35,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  background-size: 200% auto;
+  background-size: 300% auto;
   animation: textShine 5s ease infinite;
 }
 
 @keyframes textShine {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { background-position: 0% center; }
+  50% { background-position: 150% center; }
+  100% { background-position: 0% center; }
 }
 
 .bg-artwork {
@@ -46,9 +60,9 @@
 
 .glass {
   backdrop-filter: blur(16px);
-  background: rgba(24, 24, 27, 0.3);
+  background: rgba(24, 24, 27, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .gradient-border {
