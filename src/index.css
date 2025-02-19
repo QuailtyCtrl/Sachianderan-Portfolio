@@ -52,6 +52,19 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   
+  canvas {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: scale(1.1) !important;
+
+    & + div {
+      display: none !important;
+    }
+  }
+  
   @media (max-width: 768px) {
     background-attachment: scroll;
     background-position: center;

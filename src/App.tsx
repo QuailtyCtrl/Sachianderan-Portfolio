@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, useSpring, AnimatePresence } from 'framer-motion';
+import Spline from '@splinetool/react-spline';
 import { ArrowUpRight, Github, Twitter, Mail, Linkedin, ExternalLink, Building2, Calendar, Briefcase, Heart, Clock, Rocket, Code, Palette, Cpu, Globe, ChevronDown, Timer, Users, Eye, Star } from 'lucide-react';
 import Navbar from './components/Navbar';
 import WorkDetailsModal from './components/WorkDetailsModal';
@@ -553,23 +554,26 @@ function App() {
               <div className="max-w-7xl mx-auto space-y-32">
                 <ScrollAnimation id="home">
                   <div className="relative glass gradient-border animated-gradient p-8 md:p-12 lg:p-16 rounded-[2.5rem] overflow-hidden min-h-[85vh] flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-purple-500/40 via-blue-500/20 to-transparent opacity-70" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-500/30 via-transparent to-transparent opacity-70" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/20 via-white/5 to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-white/15 via-transparent to-transparent opacity-50" />
                     <div className="absolute inset-0 backdrop-blur-[2px]" />
                     
                     <div className="relative w-full">
                     <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-12">
                       <div className="flex flex-col gap-8 items-center text-center max-w-3xl mx-auto">
+                        <div className="fixed inset-0 z-0 opacity-30 pointer-events-none">
+                          <Spline scene="https://prod.spline.design/reulxzNdfgg6JT0t/scene.splinecode" />
+                        </div>
                         <div className="space-y-3">
                           <div className="relative">
-                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold gradient-text leading-[1.1] tracking-tight">
+                            <h1 className="relative z-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold gradient-text leading-[1.1] tracking-tight">
                               Sachianderan Hari Kovinth
                               <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: "100%" }}
                                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                                className="absolute -left-12 top-[100%] h-3 bg-gradient-to-r from-purple-500 via-blue-500 to-transparent rounded-full opacity-80"
+                                className="absolute -left-12 top-[100%] h-3 bg-gradient-to-r from-white/40 via-white/20 to-transparent rounded-full opacity-60"
                               />
                             </h1>
                           </div>
@@ -615,8 +619,8 @@ function App() {
                     </div>
 
                     <div className="space-y-4 mt-4 lg:mt-8 text-center">
-                      <motion.p 
-                        className="text-lg sm:text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto text-center leading-relaxed font-light tracking-wide"
+                      <motion.p
+                        className="relative z-10 text-lg sm:text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto text-center leading-relaxed font-light tracking-wide"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 1 }}
